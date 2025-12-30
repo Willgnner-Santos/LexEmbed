@@ -27,23 +27,55 @@ Export Results (CSV + Network Graph)
 
 ### Prerequisites
 
-Install required dependencies:
+Before running the code, ensure you have the following installed:
+
+- **Docker:** Download and install from [docker.com](https://www.docker.com/)
+- **Python dependencies:** The script requires certain Python packages
+
+### Setup and Run with Docker
+
+Follow these steps to run the code using Docker:
+
+#### Step 1: Create a Project Folder
+
+Create a folder on your machine where you'll store the project files.
+
+#### Step 2: Add the Docker Compose File
+
+Place the `docker-compose.yml` file in the project folder you created.
+
+#### Step 3: Start the Services
+
+Open your terminal, navigate to the project folder, and run:
+
+```bash
+docker compose up -d
+```
+
+This command will:
+- Start Milvus vector database service on port `19530`
+- Start the web UI service on port `9091`
+- Run all services in the background (`-d` flag)
+
+#### Step 4: Verify Installation
+
+Open your web browser and navigate to:
+
+```
+http://localhost:9091/webui/
+```
+
+You should see the Milvus web interface. This confirms all services are running correctly.
+
+#### Step 5: Run the Script
+
+Install required Python dependencies:
 
 ```bash
 pip install pymilvus sentence-transformers numpy pandas matplotlib networkx scikit-learn
 ```
 
-### Start Milvus Server
-
-```bash
-# Using Docker (recommended)
-docker run -d --name milvus -p 19530:19530 -p 9091:9091 milvusdb/milvus:latest
-
-# Or start local Milvus instance
-milvus standalone start
-```
-
-### Run the Script
+Then run the script:
 
 ```bash
 python A3.py
@@ -54,6 +86,14 @@ python A3.py
 1. **Console Output:** Clustering progress and similarity scores
 2. **CSV File:** `resultado_final_clusters.csv` - Complete cluster data
 3. **Visualization:** `clusters_visualizacao_aprimorada.png` - Network graph
+
+### Stopping Docker Services
+
+To stop all running services:
+
+```bash
+docker compose down
+```
 
 ---
 
